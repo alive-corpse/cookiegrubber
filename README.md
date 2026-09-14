@@ -115,6 +115,12 @@ Evgeniy Shumilov
 - evgeniy.shumilov@gmail.com
 - eashumilov@ya.ru
 
+## Security notice
+
+Cookies are transmitted over HTTP without encryption. This service is designed
+for internal use in private, isolated, and trusted networks only. Do not expose
+the API to untrusted networks or the public internet.
+
 ## Known issues
 
 - Requires Chromium to be started with `--remote-debugging-port=PORT`
