@@ -1,0 +1,32 @@
+services:
+  cookiegrubber:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cookiegrubber
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-8080}:${API_PORT:-8080}"
+    environment:
+      - CDP_HOST=${CDP_HOST}
+      - CDP_PORT=${CDP_PORT}
+      - API_HOST=${API_HOST}
+      - API_PORT=${API_PORT}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:${API_PORT:-8080}/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    entrypoint: >
+      sh -c '
+        if [ -n "${CLI_DOMAINS}" ]; then
+          exec tini -- python3 main.py \
+            --cdp ${CDP_HOST}:${CDP_PORT} \
+            --domains "${CLI_DOMAINS}"
+        else
+          exec tini -- python3 main.py \
+            --api ${API_HOST}:${API_PORT} \
+            --cdp ${CDP_HOST}:${CDP_PORT}
+        fi
+      '
