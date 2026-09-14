@@ -109,6 +109,12 @@ python main.py --api 0.0.0.0:8876 --cdp 192.168.1.100:9222
 └── .venv/                  # Local virtual environment
 ```
 
+## Author
+
+Evgeniy Shumilov
+- evgeniy.shumilov@gmail.com
+- eashumilov@ya.ru
+
 ## Known issues
 
 - Requires Chromium to be started with `--remote-debugging-port=PORT`
