@@ -18,14 +18,14 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
-    entrypoint: >
+    command: >
       sh -c '
         if [ -n "${CLI_DOMAINS}" ]; then
-          exec tini -- python3 main.py \
+          exec cookiegrubber \
             --cdp ${CDP_HOST}:${CDP_PORT} \
             --domains "${CLI_DOMAINS}"
         else
-          exec tini -- python3 main.py \
+          exec cookiegrubber \
             --api ${API_HOST}:${API_PORT} \
             --cdp ${CDP_HOST}:${CDP_PORT}
         fi
